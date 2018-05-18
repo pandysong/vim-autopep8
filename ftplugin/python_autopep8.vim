@@ -26,11 +26,14 @@ if !exists("*Autopep8(...)")
             let autopep8_cmd="autopep8"
         endif
 
-        if !executable(autopep8_cmd)
-            echoerr "File " . autopep8_cmd . " not found. Please install it first."
+        let sole_cmds = split(autopep8_cmd, '\W')
+        let sole_cmd = sole_cmds[0]
+
+        if !executable(sole_cmd)
+            echoerr "File " . sole_cmd . " not found. Please install it first."
             return
         endif
-
+        
         if exists("g:autopep8_ignore")
             let autopep8_ignores=" --ignore=".g:autopep8_ignore
         else
